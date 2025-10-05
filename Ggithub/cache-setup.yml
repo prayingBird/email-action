@@ -1,15 +1,16 @@
-name: Cache Dependencies Example
+name: Dependency Cache Example
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout source
         uses: actions/checkout@v4
 
       - name: Cache dependencies
@@ -20,4 +21,5 @@ jobs:
           key: cache-63be2cd
 
       - name: prime-cache-63be2cd
-        run: echo "Cache hit? ${{ steps.cache-step.outputs.cache-hit }}"
+        run: |
+          echo "Cache result: ${{ steps.cache-step.outputs.cache-hit }}"
